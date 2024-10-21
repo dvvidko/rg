@@ -236,16 +236,16 @@
 			itemRow.classList.add('form-row', 'align-items-end', 'item-row');
 			itemRow.innerHTML = `
 				<div class="form-group col-md-6">
-					<label>Item Description</label>
-					<input type="text" class="form-control" name="itemDescription" placeholder="Enter Item Description" required />
+					<label>Polozka</label>
+					<input type="text" class="form-control" name="itemDescription" placeholder="Nazev polozky" required />
 				</div>
 				<div class="form-group col-md-2">
-					<label>Quantity</label>
-					<input type="number" class="form-control" name="quantity" placeholder="Enter Quantity" required />
+					<label>Mnozstvi</label>
+					<input type="number" class="form-control" name="quantity" placeholder="Mnozstvi" required />
 				</div>
 				<div class="form-group col-md-3">
-					<label>Unit Price</label>
-					<input type="number" class="form-control" name="unitPrice" placeholder="Enter Unit Price" required />
+					<label>Cena za ks</label>
+					<input type="number" class="form-control" name="unitPrice" placeholder="Cena za ks" required />
 				</div>
 				<div class="form-group col-md-1">
 					<button type="button" class="btn btn-danger remove-item">X</button>
@@ -481,8 +481,8 @@
 			// Initialize variables
 			let currentY = 180; // Starting Y position for the content
 			const pageWidth = 944;
-			const leftX = 104;
-			const rightX = pageWidth - 104;
+			const leftX = 86;
+			const rightX = pageWidth - 86;
 			const contentWidth = pageWidth - 2 * leftX;
 			const regularLineHeight = 50;
 			const largeLineHeight = 74; // Increased line height for larger font sizes
@@ -524,7 +524,7 @@
 			
 			doc.setFontSize(106);
 			centerText(receiptData.businessName, 80);
-			doc.setFontSize(72);
+			doc.setFontSize(75);
 			centerText(receiptData.address, 130);
 			
 			// Conditionally render REGON and NIP based on values
@@ -568,7 +568,7 @@
 			});
 
 			// Manually adjust letter spacing for the dashed line
-			let dashCharSpacing = 1; // Start with a small spacing value and adjust as needed
+			let dashCharSpacing = 1.3; // Start with a small spacing value and adjust as needed
 			doc.setCharSpace(dashCharSpacing);
 			
 			const dashWidth = doc.getTextWidth('-');
@@ -603,11 +603,11 @@
 			currentY += largeLineHeight - 25; // Reduce the space (adjust -30 as needed)
 			
 			// Reset font size for following lines
-			doc.setFontSize(72);
+			doc.setFontSize(75);
 			
 			// Time, Number, and KIEROWNIK centered
 			doc.text('00001 #001', leftX, currentY);
-			doc.text(receiptData.time, pageWidth - padding - doc.getTextWidth(receiptData.time), currentY);
+			doc.text(receiptData.time, rightX, currentY, { align: 'right' });
 			centerText('KIEROWNIK', currentY);
 			currentY += regularLineHeight;
 			
@@ -646,7 +646,7 @@
 			
 			// Payment (Cash)
 			doc.text('GOTÓWKA', leftX, currentY);
-			const gotowkaPriceX = rightX + 2; // Shift 5 pixels to the right (adjust as needed)
+			const gotowkaPriceX = rightX + 3; // Shift 5 pixels to the right (adjust as needed)
 			doc.text(formatWithComma(receiptData.totalPrice) + ' PLN', gotowkaPriceX, currentY, { align: 'right' });
 			
 			// Save the PDF
