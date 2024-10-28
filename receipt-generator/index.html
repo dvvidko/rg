@@ -451,12 +451,6 @@
 			const letterSpacing = -3; // Adjust this value for tighter or looser letter spacing
 			doc.setCharSpace(letterSpacing); // Apply spacing to all text
 			
-			// Watermark - semi-transparent text in the background
-			doc.setFontSize(120); // Adjust font size for watermark
-			doc.setTextColor(150, 150, 150); // Light gray color for watermark
-			doc.text('WATERMARK', 472, 630, { align: 'center', angle: 45 }); // Center watermark, 45-degree angle
-			doc.setTextColor(0, 0, 0); // Reset text color back to black after the watermark
-			
 			// Function to format date as YYYY/MM/DD
 			function formatDate(dateString) {
 				const date = new Date(dateString);
